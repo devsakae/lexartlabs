@@ -16,7 +16,6 @@ function cyclotron(params) {
   if (particle && (typeof particle !== 'string' || !particles.includes(particle))) return 'ERROR: Please inform valid particle';
   if ((matrix && typeof matrix !== 'number') || matrix < 4) return 'ERROR: Please inform matrix type number 4 or higher';
 
-	
 	// If particle is informed (and valid)
 	let response = [];
 	const firstLineFunction = (letter) => new Array(matrix).fill(letter);
