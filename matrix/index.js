@@ -23,15 +23,17 @@ function cyclotron(params) {
 	let response = [];
 	switch (particle) {
 		case 'e': // Electron
-
+			const eRow = new Array(matrix).fill('e');
 			response = 'Electron';
 			break;
 
 		case 'n': // Neutron
+			const nRow = new Array(matrix).fill('n');
 			response = 'Neutron'
 			break;
 
 		case 'p': // Proton
+			const pRow = new Array(matrix).fill('p');
 			response = 'Proton';
 			break;
 
@@ -56,5 +58,7 @@ console.log(cyclotron(['e', 'x'])); 						// Expects "ERROR: Please inform matri
 console.log(cyclotron(['x'])); 									// Expects "ERROR: Please inform matrix number higher than 0"
 
 // Content tests
-console.log(cyclotron([5])); 										// Expects "No particle answer"
-console.log(cyclotron(['p', 5])); 							// Expects "Particle asnswer"
+console.log(cyclotron([5])); 										// Expects 5x5 matrix
+console.log(cyclotron(['p', 5])); 							// Expects 5x5 Proton matrix
+console.log(cyclotron(['e', 4])); 							// Expects 4x4 Electron matrix
+console.log(cyclotron(['n', 3])); 							// Expects 3x3 Neutron matrix
