@@ -16,8 +16,8 @@ function cyclotron(params) {
   if (particle && (typeof particle !== 'string' || !particles.includes(particle))) return 'ERROR: Please inform valid particle';
   if ((matrix && typeof matrix !== 'number') || matrix < 1) return 'ERROR: Please inform matrix number higher than 0';
 
-	// Prepares for response.
-	const arrayRow = new Array(matrix).fill(1);
+	// Prepares for response (no particle or neutron);
+	let arrayRow = new Array(matrix).fill(1);
 	
 	// If particle is informed (and valid)
 	let response = [];
@@ -25,12 +25,13 @@ function cyclotron(params) {
 		case 'n': // Neutron
 			const nRow = new Array(matrix).fill('n');
 			response.push(nRow);
-			for (let i = 1; i < matrix; i++) response.push(arrayRow);
 			break;
 
 		case 'e': // Electron
 			const eRow = new Array(matrix).fill('e');
-			response = 'Electron';
+			response.push(eRow);
+			const newArrayRow = arrayRow.map((item, index) => index === (arrayRow.length - 1) ? 'e' : item)
+			arrayRow = newArrayRow;
 			break;
 	
 		case 'p': // Proton
@@ -39,10 +40,10 @@ function cyclotron(params) {
 			break;
 
 		default: // Particle not informed
-			for (let i = 1; i <= matrix; i++) response.push(arrayRow);
+			response.push(arrayRow)
 			break;
 		}
-
+		for (let i = 1; i < matrix; i++) response.push(arrayRow);
 		return response;
 }
 
@@ -59,7 +60,7 @@ function cyclotron(params) {
 // console.log(cyclotron(['x'])); 									// Expects "ERROR: Please inform matrix number higher than 0"
 
 // Content tests
-// console.log(cyclotron([5])); 										// Expects 5x5 matrix
+console.log(cyclotron([5])); 										// Expects 5x5 matrix
+console.log(cyclotron(['n', 4])); 							// Expects 4x4 Neutron matrix
+console.log(cyclotron(['e', 4])); 							// Expects 4x4 Electron matrix
 // console.log(cyclotron(['p', 5])); 							// Expects 5x5 Proton matrix
-// console.log(cyclotron(['e', 4])); 							// Expects 4x4 Electron matrix
-console.log(cyclotron(['n', 4])); 							// Expects 3x3 Neutron matrix
