@@ -1,0 +1,23 @@
+{
+  "name": "matrix",
+  "version": "1.0.0",
+  "description": "Lexartlabs technical test",
+  "main": "index.js",
+  "scripts": {
+    "start": "node cyclotron.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devsakae/lexartlabs.git"
+  },
+  "author": "devsakae",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devsakae/lexartlabs/issues"
+  },
+  "homepage": "https://github.com/devsakae/lexartlabs#readme",
+  "devDependencies": {
+    "jest": "^29.6.4"
+  }
+}
