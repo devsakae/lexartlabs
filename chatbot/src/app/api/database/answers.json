@@ -1,13 +1,21 @@
-[
   {
     "greetings": [
-      { "message": "Hey USERNAME_VARIABLE! 👋\\nI'm your assistant for today." },
-      { "message": "Hi USERNAME_VARIABLE, how are you?\\nSo glad to help you today!" },
-      { "message": "Oh hello to you, USERNAME_VARIABLE! 👍\\nI'm ready to assist you for what you need." }
+      {
+        "message": "Hey USERNAME_VARIABLE! 👋\nI'm OPTUS, and will be your assistant for today."
+      },
+      {
+        "message": "Hi USERNAME_VARIABLE, how are you?\nSo glad to help you today!"
+      },
+      {
+        "message": "Oh hello to you, USERNAME_VARIABLE! 👍\nI'm ready to assist you for what you need."
+      }
     ],
-    "postGreeting": {
-      "message": "I can help with general queries related to billijng, outages, store locations and roaming rates or I can connect you to a team member if you leave a message."
-    },
+    "askForName": "But first, let's connect you. Please, type your username to proceed:",
+    "postGreeting": "I can help with general queries related to billing, outages, store locations and roaming rates or I can connect you to a team member if you leave a message.\nYou can always say 'goodbye' to finish and save this conversation (whereas you agree to our privacy policy)",
+    "userLogged": [
+      { "message": "Welcome back, USERNAME_VARIABLE!" },
+      { "message": "Please, type your password to start a new conversation or select a previous one:" }
+    ],
     "loanApplyOption": {
       "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "url": "https://www.loanapplication.website"
@@ -17,4 +25,3 @@
       "url": "https://www.loanconditions.website"
     }
   }
-]
