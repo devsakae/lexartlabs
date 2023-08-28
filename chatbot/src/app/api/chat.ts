@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+// import answers from './database/answers.json';
 
 type Data = {
   message: string;

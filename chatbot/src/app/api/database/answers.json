@@ -1,0 +1,20 @@
+[
+  {
+    "greetings": [
+      { "message": "Hey USERNAME_VARIABLE! 👋\\nI'm your assistant for today." },
+      { "message": "Hi USERNAME_VARIABLE, how are you?\\nSo glad to help you today!" },
+      { "message": "Oh hello to you, USERNAME_VARIABLE! 👍\\nI'm ready to assist you for what you need." }
+    ],
+    "postGreeting": {
+      "message": "I can help with general queries related to billijng, outages, store locations and roaming rates or I can connect you to a team member if you leave a message."
+    },
+    "loanApplyOption": {
+      "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "url": "https://www.loanapplication.website"
+    },
+    "loanConditionOption": {
+      "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "url": "https://www.loanconditions.website"
+    }
+  }
+]
