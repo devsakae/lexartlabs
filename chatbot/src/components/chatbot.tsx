@@ -6,7 +6,7 @@ import UserMessage from './chatmsgFromUser';
 import OptionsBox from './optionBox';
 
 // Type for the chatbot log
-type Log = {
+export type Log = {
   author?: string;
   screen?: OptionMenu[] | null;
   timestamp?: Date;
@@ -20,14 +20,14 @@ export type OptionMenu = {
   info: string[],
 }
 
-type UsernameFunction = {
+export type UsernameFunction = {
   data: string;
   user: string;
 };
 
-type Thread = 'blank' | 'info_user' | 'info_password' | 'start';
+export type Thread = 'blank' | 'info_user' | 'info_password' | 'start';
 
-// Basic configs
+// Presettings
 const greetingsRegex = /(^good)|(hello)|(i\swant)|(hey\b)|(hi\b)|(get\sstart\b)/gi;
 const forbiddenUsernames = ['visitor', 'chatbot', 'help', 'loan'];
 const chatbot = 'Chatbot';
@@ -41,15 +41,18 @@ const Chatbot = () => {
   const [loanInfo, setLoanInfo] = useState<OptionMenu[]>([])
   const [cache, setCache] = useState<string>('');
   const [thread, setThread] = useState<Thread>('blank');
+  const [connectToHuman, setConnectToHuman] = useState<boolean>(false);
 
+  // Functions needed
   const changeUsernameVariable = (params: UsernameFunction) => params.data.replace('USERNAME_VARIABLE', params.user);
-
+  
   const addMessage = (author: string, message: string) => {
     const mockLag = (author === chatbot) ? 630 : 0;
     const timestamp = new Date();
     setTimeout(() => setLog(prev => [...prev, { author: author, timestamp, message }]), mockLag);
   };
 
+  // Should be on top. Consider on refactoring
   useEffect(() => {
     // localStorage inside useEffect because of Next.js v13 bug
     const checkLocal = localStorage.getItem('devsakaelexartlabs') || null;
@@ -82,7 +85,7 @@ const Chatbot = () => {
       .then(response => response.json())
       .then(({ data }) => {
         setLoanInfo(data);
-        setLog(prev => [...prev, { screen: data, author: chatbot, timestamp }])
+        setTimeout(() => setLog(prev => [...prev, { screen: data, author: chatbot, timestamp }]), 650)
       })
       .catch(error => console.error(error));
   }
@@ -121,18 +124,18 @@ const Chatbot = () => {
         setUser(message);
         const chatbotUsername = JSON.stringify({ name: message });
         localStorage.setItem('devsakaelexartlabs', chatbotUsername);
-        addMessage(chatbot, `Welcome, ${message.trim()}! Please, write your password to proceed (anything will do, this is a test):`);
+        addMessage(chatbot, `Welcome, ${message.trim()}! Please, write your password (we won't save/check, it's just a test):`);
         setThread('info_password');
         break;
     }
   }
 
   const checkAnswer = async (message: string) => {
-    // Message empty validator
+    // If message is empty, ignore
     if (message.trim() === '') return;
 
-    // Is user typing password? Hide it
-    thread === 'info_password' ? addMessage(user, '********') : addMessage(user, message);
+    // Is user typing password? Hide it!
+    thread === 'info_password' ? addMessage(user, '***********') : addMessage(user, message);
 
     // Is user providing username?
     if (thread === 'info_user') return login('info_user', message);
@@ -143,6 +146,16 @@ const Chatbot = () => {
       addMessage(chatbot, 'Choose one of our options:')
       return setTimeout(() => showOptions(), 780)
     };
+
+    if (connectToHuman) {
+      setConnectToHuman(false);
+      if (message.match(/\bno\b/ig) && connectToHuman) {
+        addMessage(chatbot, 'You can ask for help by typing \'help\'. Meanwhile, check our most common options below:');
+        return showOptions();
+      }
+      // Connect to a human logic goes here
+      return addMessage(chatbot, 'Ok, we are connecting you to a human operator. Please hold...')
+    }
 
     // Ending conversation
     if (message.match(/goodbye/gi)) {
@@ -179,9 +192,13 @@ const Chatbot = () => {
       return showOptions();
     };
 
+    // It's a question?
+    if (message.endsWith('?'))
+
     // All other messages here
     addMessage(chatbot, "Sorry, I didn't understood what you just said.");
     addMessage(chatbot, "Do you want to chat with a human?");
+    setConnectToHuman(true);
   };
 
   const handleAction = (id: string) => {
@@ -204,10 +221,11 @@ const Chatbot = () => {
   };
 
   return (
-    <section className='flex flex-col items-center justify-center w-full h-screen'>
+    <section className='flex flex-col items-center justify-center w-full h-screen bg-stone-100'>
       <div
         id='chatarea'
-        className='flex flex-col gap-y-2 justify-end bg-red-100 w-full md:w-3/5 h-screen md:h-[420px] p-3 overflow-clip md:border-gray-400 md:border-2 md:rounded-lg md:shadow-xl'
+        className='flex flex-col gap-y-2 justify-end bg-white w-full md:w-3/5 h-screen md:h-[420px] p-3 overflow-clip md:border-gray-400 md:border-2 md:rounded-lg md:shadow-xl'
+        draggable
       >
         {log?.map((item, index) =>
           (item.screen && item?.screen.length > 1)
@@ -216,7 +234,7 @@ const Chatbot = () => {
               ? (<BotMessage message={item.message} key={index} />)
               : (<UserMessage message={item.message} key={index} />)
         )}
-        <form className='flex flex-row w-full text-black'>
+        <form className='flex flex-row w-full text-black border-t-2 border-black border-opacity-10'>
           <input
             type={thread === 'info_password' ? 'password' : 'text'}
             placeholder='Type your message and hit [enter] or click send'

@@ -19,8 +19,7 @@
         "title": "I want apply for a loan",
         "info": [
           "To apply for a loan, you should have the following requisites",
-          "> Have more than 18 years\n> Resident on the country\n> Agree with our terms and conditions",
-          "(...)"
+          "> Have more than 18 years\n> Resident on the country\n> Agree with our terms and conditions"
         ],
         "url": "/apply"
       },
@@ -29,8 +28,7 @@
         "title": "Loan conditions",
         "info": [
           "We have the best conditions for loans!",
-          "There are a number of important pieces of information to consider when reviewing loan terms. Reading through a loan agreement can take a little time, especially for a more complicated loan, such as a mortgage. If you aren't able to read a loan agreement in full, here are the most important loan terms to keep in mind.",
-          "(...)"
+          "There are a number of important pieces of information to consider when reviewing loan terms. Reading through a loan agreement can take a little time, especially for a more complicated loan, such as a mortgage. If you aren't able to read a loan agreement in full, here are the most important loan terms to keep in mind."
         ],
         "url": "/loan/conditions"
       },
@@ -38,9 +36,8 @@
         "id": "HELP_MENU",
         "title": "Help",
         "info": [
-          "If you need assistance on anything else, you can say 'talk to human'",
-          "Read more about our business on our website",
-          "(...)"
+          "I can help you with your needs in loans, general queries related to billing, outages, store locations and roaming rates.",
+          "Are you interested in knowing more about loans?"
         ],
         "url": "/help"
       }
