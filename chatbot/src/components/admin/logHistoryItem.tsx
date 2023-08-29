@@ -1,14 +1,13 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Doc } from './logHistory';
 import csvDownload from 'json-to-csv-export';
 
 type Props = {
   item: Doc;
-  handleClick: Function;
 };
 
-const LogHistoryItem = ({ item, handleClick }: Props) => {
+const LogHistoryItem = ({ item }: Props) => {
   const [openLog, setOpenLog] = useState(false);
   const dataToConvert = {
     data: item.log,
