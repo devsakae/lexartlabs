@@ -19,3 +19,7 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+a {
+  @apply underline text-purple-100 hover:text-purple-300
+}

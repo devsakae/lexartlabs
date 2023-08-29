@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+const path = require('path');
 const fs = require('fs');
 
 export async function POST(req: NextRequest) {
   const res = await req.json();
-  console.log(res);
-  // const lastmessagetime = new Date(res[res.length - 1].timestamp).toString()
-  await fs.writeFile(`Conversation user #1 - teste.csv`, JSON.stringify(res.log), 'utf8', (err: any) => {
+
+  await fs.writeFile(`${path}/logs/Conversation user #1 - teste.csv`, JSON.stringify(res.log), 'utf8', (err: any) => {
     if (err) console.error('Some error occured')
     console.log('Finished');
   })
