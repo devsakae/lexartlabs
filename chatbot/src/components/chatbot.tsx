@@ -142,20 +142,10 @@ const Chatbot = () => {
     if (thread === 'info_password') return login('info_password', message);
 
     // Check for word 'loan'
-    if (message.match(/loan\b/gi)) {
+    if (message.match(/(loan\b)|(\bloan)/gi)) {
       addMessage(chatbot, 'Choose one of our options:')
       return setTimeout(() => showOptions(), 780)
     };
-
-    if (connectToHuman) {
-      setConnectToHuman(false);
-      if (message.match(/\bno\b/ig) && connectToHuman) {
-        addMessage(chatbot, 'You can ask for help by typing \'help\'. Meanwhile, check our most common options below:');
-        return showOptions();
-      }
-      // Connect to a human logic goes here
-      return addMessage(chatbot, 'Ok, we are connecting you to a human operator. Please hold...')
-    }
 
     // Ending conversation
     if (message.match(/goodbye/gi)) {
@@ -192,8 +182,15 @@ const Chatbot = () => {
       return showOptions();
     };
 
-    // It's a question?
-    if (message.endsWith('?'))
+    if (connectToHuman) {
+      setConnectToHuman(false);
+      if (message.match(/\bno\b/ig) && connectToHuman) {
+        addMessage(chatbot, 'You can ask for help by typing \'help\'. Meanwhile, check our most common options below:');
+        return showOptions();
+      }
+      // Connect to a human logic goes here
+      return addMessage(chatbot, 'Ok, we are connecting you to a human operator. Please hold...')
+    }
 
     // All other messages here
     addMessage(chatbot, "Sorry, I didn't understood what you just said.");

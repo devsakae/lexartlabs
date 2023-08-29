@@ -13,7 +13,7 @@ const LogHistoryItem = ({ item, handleClick }: Props) => {
   const dataToConvert = {
     data: item.log,
     filename: item.filename,
-    headers: ['timestamp', 'name', 'message', 'screen']
+    headers: ['author', 'message', 'timestamp', 'screen']
   }
 
   return (
