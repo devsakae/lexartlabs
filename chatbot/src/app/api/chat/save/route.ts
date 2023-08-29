@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, setDoc, getCountFromServer, query, getDocs } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getCountFromServer, query, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCa3J-UryL7lzM1w6O-toqs_N6iUYg0sAw",
-  authDomain: "lexartlabsbydevsakae.firebaseapp.com",
-  projectId: "lexartlabsbydevsakae",
-  storageBucket: "lexartlabsbydevsakae.appspot.com",
-  messagingSenderId: "670372265591",
-  appId: "1:670372265591:web:e346f89e37eecffb85d072"
+  apiKey: process.env.NEXT_PUBLIC_FIRESTORE_API,
+  authDomain: process.env.NEXT_PUBLIC_FIRESTORE_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIRESTORE_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FIRESTORE_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIRESTORE_SENDERID,
+  appId: process.env.NEXT_PUBLIC_FIRESTORE_APPID
 };
 
 const app = initializeApp(firebaseConfig);
