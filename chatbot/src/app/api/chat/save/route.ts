@@ -41,27 +41,6 @@ export async function GET() {
     return NextResponse.json({ status: 200, data: response })
   } catch (e) {
     console.error('Error searching docs');
-    return NextResponse.json({ status: 500, message: 'Error fetching documents' });
+    return NextResponse.json({ error: 'Error fetching documents'}, { status: 500 });
   }
 }
-
-// import { NextRequest, NextResponse } from "next/server";
-// const path = require('path');
-// const fs = require('fs');
-// const json2csv = require('json2csv').parse;
-
-// export async function POST(req: NextRequest) {
-//   try {
-//     fs.mkdir(path.join(__dirname, 'logs'), (err: Error) => { if (err) console.error(err); });
-//     const { log } = await req.json();
-//     const files = await fs.readdirSync(`${__dirname}/csv`, { withFileTypes: true });
-//     const lastDate = log[log.length - 1].timestamp;
-//     const fields = ['timestamp', 'author', 'message'];
-//     const csv = json2csv(log, { headers: { fields } });
-//     fs.writeFile(`${__dirname}/logs/Conversation user #${files} - ${lastDate}.json`, JSON.stringify(log), "utf-8", function(err: Error) { if (err) throw err; });
-//   } catch (err) {
-//     return NextResponse.json({ status: 500, message: 'ERROR saving log'});
-//   } finally {
-//      return NextResponse.json({ status: 200, message: 'LOG_SAVED' });
-//   }
-// }

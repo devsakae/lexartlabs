@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import { Doc } from './logHistory'
+import csvDownload from 'json-to-csv-export'
 
 type Props = {
   item: Doc;
+  handleClick: Function;
 }
 
-const LogHistoryItem = ({ item }: Props) => {
+const LogHistoryItem = ({ item, handleClick }: Props) => {
   const [openLog, setOpenLog] = useState(false);
+  const dataToConvert = {
+    data: item.log,
+    filename: item.filename,
+    headers: ['timestamp', 'name', 'message', 'screen']
+  }
 
   return (
     <div className='flex flex-col border-2 rounded-md p-2'>
@@ -18,7 +26,16 @@ const LogHistoryItem = ({ item }: Props) => {
           <button className='p-2 px-4 bg-orange-300 hover:bg-orange-400 rounded-sm' onClick={() => setOpenLog(prev => !prev)}>
             {openLog ? 'Close log' : 'Open log'}
           </button>
-          <button className='p-2 px-4 bg-green-300 hover:bg-green-400 rounded-sm'>
+          {/* <a
+            href={csvProperties?.file}
+            download={ csvProperties?.filename }
+          >
+            Export CSV
+          </a> */}
+          <button
+            className='p-2 px-4 bg-green-300 hover:bg-green-400 rounded-sm'
+            onClick={ () => csvDownload(dataToConvert) }
+          >
             CSV file
           </button>
         </div>

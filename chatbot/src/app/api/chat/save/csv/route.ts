@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 const fs = require('fs');
-const json2csv = require('json2csv').parse;
+import { json2csv } from 'json-2-csv';
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const payload = await req.json();
-    const fields = ['timestamp', 'author', 'message'];
-    const csv = json2csv(payload.log, { headers: { fields } });
-    fs.writeFile(`${__dirname}/${payload.filename}.csv`, csv, "csv", function(err: Error) { if (err) throw err; });
-    return NextResponse.json({ status: 200, message: 'Saved log' });
+    const csv = await json2csv(payload.log);
+    const headers = new Headers();
+    headers.set('Content-Type', 'text/csv');
+    return NextResponse.json(csv, { status: 200, statusText: 'Saved log', headers });
 
   } catch (err) {
-    return NextResponse.json({ status: 500, message: 'ERROR saving log'});
+    return NextResponse.json({ error: 'Error converting log'}, { status: 500 });
   }
 }

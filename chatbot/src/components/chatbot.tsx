@@ -159,6 +159,7 @@ const Chatbot = () => {
 
     // Ending conversation
     if (message.match(/goodbye/gi)) {
+      addMessage(chatbot, 'Ok, saving thread, please hold...')
       const savedLog = JSON.stringify({ name: user, log: log });
       await fetch('/api/chat/save', {
         method: 'POST',
@@ -188,7 +189,6 @@ const Chatbot = () => {
     // User asked for help
     if (message.match(/help/i)) {
       addMessage(chatbot, 'Sure, what do you need?');
-      user === 'visitor' ? setThread('info_user') : setThread('info_password');
       return showOptions();
     };
 

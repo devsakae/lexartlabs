@@ -7,6 +7,5 @@ export async function GET() {
     ...answers,
     "greetings": greet,
   }
-  let response = { status: 200, data };
-  return NextResponse.json(response);
+  return NextResponse.json({ data: data }, { status: 200 });
 }

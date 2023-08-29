@@ -18,6 +18,7 @@
     "firebase": "^10.3.0",
     "firebase-admin": "^11.10.1",
     "html-to-react": "^1.6.0",
+    "json-to-csv-export": "^2.1.1",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "react": "18.2.0",
@@ -25,8 +26,5 @@
     "react-icons": "^4.10.1",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
-  },
-  "devDependencies": {
-    "json2csv": "^6.0.0-alpha.2"
   }
 }
