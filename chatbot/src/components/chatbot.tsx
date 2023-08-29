@@ -25,7 +25,7 @@ type UsernameFunction = {
   user: string;
 };
 
-type Thread = 'blank' | 'info_user' | 'info_password' | 'info_email' | 'start';
+type Thread = 'blank' | 'info_user' | 'info_password' | 'start';
 
 // Basic configs
 const greetingsRegex = /(^good)|(hello)|(i\swant)|(hey\b)|(hi\b)|(get\sstart\b)/gi;
@@ -64,8 +64,9 @@ const Chatbot = () => {
           const greetUser = changeUsernameVariable({ data: data.greetings, user: localUser });
           if (localUser !== 'visitor') {
             const welcomeBack = [greetUser, data.userLogged];
-            welcomeBack.map((item, index) => setTimeout(() => addMessage(chatbot, item), (index + 1) * 150));
-            return setThread('info_email');
+            welcomeBack.forEach(item => addMessage(chatbot, item));
+            setTimeout(() => showOptions(), 700);
+            return setThread('start');
           }
           return setLoadedMessage([greetUser, data.askForName]);
         })
@@ -88,11 +89,6 @@ const Chatbot = () => {
 
   const login = async (info: Thread, message: string) => {
     switch (info) {
-      case 'info_email':
-        if (!message.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) return addMessage(chatbot, 'Please write your e-mail correctly.')
-        setThread('start');
-        addMessage(chatbot, `Welcome back, ${user}!`);
-        return showOptions();
       case 'info_password':
         if (message.split(' ').length > 1) {
           addMessage(chatbot, 'Sorry, your password can\'t have blank spaces.');
@@ -125,7 +121,7 @@ const Chatbot = () => {
         setUser(message);
         const chatbotUsername = JSON.stringify({ name: message });
         localStorage.setItem('devsakaelexartlabs', chatbotUsername);
-        addMessage(chatbot, `Welcome, ${message.trim()}! Please, write your password to proceed:`);
+        addMessage(chatbot, `Welcome, ${message.trim()}! Please, write your password to proceed (anything will do, this is a test):`);
         setThread('info_password');
         break;
     }
@@ -141,7 +137,6 @@ const Chatbot = () => {
     // Is user providing username?
     if (thread === 'info_user') return login('info_user', message);
     if (thread === 'info_password') return login('info_password', message);
-    if (thread === 'info_email') return login('info_email', message);
 
     // Check for word 'loan'
     if (message.match(/loan\b/gi)) {

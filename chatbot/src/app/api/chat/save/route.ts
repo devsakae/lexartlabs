@@ -3,9 +3,12 @@ const path = require('path');
 const fs = require('fs');
 
 export async function POST(req: NextRequest) {
+  fs.mkdir('/logs', { recursive: true }, (err: any) => {
+    if (err) throw err;
+  });
   const res = await req.json();
-
-  await fs.writeFile(`${path}/logs/Conversation user #1 - teste.csv`, JSON.stringify(res.log), 'utf8', (err: any) => {
+  const dirpath = path.join(__dirname, '/logs');
+  fs.writeFile(`${dirpath}/RELATORIO TESTE.csv`, JSON.stringify(res.log), 'utf8', (err: any) => {
     if (err) console.error('Some error occured')
     console.log('Finished');
   })
