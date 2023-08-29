@@ -2,7 +2,7 @@ import React from 'react';
 import { Parser } from 'html-to-react';
 
 type Props = {
-  message?: any;
+  message: string;
 };
 
 const BotMessage = (props: Props) => {

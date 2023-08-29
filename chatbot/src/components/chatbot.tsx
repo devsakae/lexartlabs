@@ -229,7 +229,7 @@ const Chatbot = () => {
       >
         {log?.map((item, index) =>
           (item.screen && item?.screen.length > 1)
-            ? (<OptionsBox options={item.screen} handleAction={handleAction} />)
+            ? (<OptionsBox options={item.screen} handleAction={handleAction} key={ index } />)
             : item.author === chatbot
               ? (<BotMessage message={item.message} key={index} />)
               : (<UserMessage message={item.message} key={index} />)
