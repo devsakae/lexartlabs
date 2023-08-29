@@ -14,7 +14,7 @@ const Page = (props: Props) => {
 
   return (
     <section className='flex flex-col h-screen'>
-      <div className='flex flex-col items-center justify-center bg-slate-200 w-full h-1/6 fixed'>
+      <div className='flex flex-col items-center justify-center bg-slate-200 dark:bg-slate-800 w-full h-1/6 fixed'>
         <h1>Chatbot log history</h1>
         <legend className='text-xs'>Created by Rodrigo Sakae</legend>
       </div>
@@ -26,7 +26,7 @@ const Page = (props: Props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Password provided by e-mail'
-            className='border-[1px] border-purple-400 w-80 p-2 rounded-md'
+            className='border-[1px] border-purple-400 w-80 p-2 rounded-md dark:text-black'
           />
         }
       </div>

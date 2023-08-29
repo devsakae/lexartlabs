@@ -28,7 +28,7 @@ export type UsernameFunction = {
 export type Thread = 'blank' | 'info_user' | 'info_password' | 'start';
 
 // Presettings
-const greetingsRegex = /(^good)|(hello)|(i\swant)|(hey\b)|(hi\b)|(get\sstart\b)/gi;
+const greetingsRegex = /(^good)|(^hello)|(i\swant)|(hey\b)|(hi\b)|(get\sstart\b)/gi;
 const forbiddenUsernames = ['visitor', 'chatbot', 'help', 'loan'];
 const chatbot = 'Chatbot';
 const visitor = 'visitor'
@@ -173,7 +173,7 @@ const Chatbot = () => {
         loadedMessage.map((message, index) => setTimeout(() => addMessage(chatbot, message as string), (index + 1) * 450));
         return setThread('info_user');
       }
-      return addMessage(chatbot, 'Hello, how are you?');
+      return addMessage(chatbot, 'Hello, how are you? 😁');
     };
 
     // User asked for help
@@ -184,7 +184,7 @@ const Chatbot = () => {
 
     if (connectToHuman) {
       setConnectToHuman(false);
-      if (message.match(/\bno\b/ig) && connectToHuman) {
+      if (message.match(/\bno\b/ig)) {
         addMessage(chatbot, 'You can ask for help by typing \'help\'. Meanwhile, check our most common options below:');
         return showOptions();
       }
@@ -218,10 +218,10 @@ const Chatbot = () => {
   };
 
   return (
-    <section className='flex flex-col items-center justify-center w-full h-screen bg-stone-100'>
+    <section className='flex flex-col items-center justify-center w-full h-screen bg-stone-100 dark:bg-neutral-950'>
       <div
         id='chatarea'
-        className='flex flex-col gap-y-2 justify-end bg-white w-full md:w-3/5 h-screen md:h-[420px] p-3 overflow-clip md:border-gray-400 md:border-2 md:rounded-lg md:shadow-xl'
+        className='flex flex-col gap-y-2 justify-end bg-white dark:bg-zinc-100 w-full md:w-3/5 h-screen md:h-[420px] p-3 overflow-clip md:border-gray-400 md:border-2 md:rounded-lg md:shadow-xl'
         draggable
       >
         {log?.map((item, index) =>
@@ -238,7 +238,7 @@ const Chatbot = () => {
             value={cache}
             onChange={handleMessage}
             disabled={disabledInput}
-            className='w-full h-10 rounded-md px-3 text-black'
+            className='w-full h-10 rounded-md px-3 text-black dark:bg-transparent dark:placeholder-neutral-600'
           />
           <button onClick={sendMessage} className='px-5'>
             <IoSend />

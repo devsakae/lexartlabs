@@ -48,7 +48,7 @@ const LogHistory = () => {
 
   return (
     <section className='w-full h-screen flex flex-col items-center justify-start gap-5'>
-      <h2>DISCLAIMER: This logs will be erased in maximum 30 days</h2>
+      <h2>DISCLAIMER: Logs will be erased September 28</h2>
       <div className='flex flex-col gap-2 w-full md:w-3/4 px-4'>
         { loading ? (<div>Loading...</div>) : data?.map((entry) => (<LogHistoryItem item={ entry } key={ entry.filename } handleClick={ convertAndDownload } />)) }
       </div>
