@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-const path = require('path');
 const fs = require('fs');
+const json2csv = require('json2csv').parse;
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-
-  for (const entry of body.log) {
-    fs.appendFileSync(`${__dirname}/history_${body.name}.json`, JSON.stringify(entry));
-  };
+  try {
+    const { log } = await req.json();
+    const files = fs.readdirSync(__dirname, { withFileTypes: true }).length
+    const lastDate = log[log.length - 1].timestamp;
+    const fields = ['timestamp', 'author', 'message'];
+    const csv = json2csv(log, { fields });
+    fs.writeFile(`${__dirname}/Conversation user #${files} - ${lastDate}.csv`, csv, function(err: Error) {
+      if (err) throw err;
+      else return NextResponse.json({ status: 200, message: 'LOG_SAVED' });
+    })
+  } catch (err) {
+    return NextResponse.json({ status: 500, message: 'ERROR saving log'});
+  }
   
-  // fs.writeFile(path + '/relatorio.json', JSON.stringify(res), 'utf8', function (err: Error){
-  //   if (err) console.error('Some error occured')
-  //   else console.log('Written!');
-  // })
-  return NextResponse.json({ status: 200, message: 'LOG_SAVED' });
 }
 
 export const config = {

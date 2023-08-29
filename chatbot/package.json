@@ -23,5 +23,8 @@
     "react-icons": "^4.10.1",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "json2csv": "^6.0.0-alpha.2"
   }
 }
